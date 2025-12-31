@@ -9,8 +9,9 @@ x-db-credentials: &db-credentials                             # Use the default 
 services:
   # listmonk app
   app:
-    image: https://github.com/prativahq/listmonk.git
-    container_name: listmonk_app
+    build: .
+    image: sahyoi-mailer:latest                               # https://github.com/prativahq/listmonk
+    container_name: sahyogi_listmonk_app
     restart: unless-stopped
     ports:
       - "9000:9000"                                           # To change the externally exposed port, change to: $custom_port:9000
@@ -48,7 +49,7 @@ services:
     container_name: listmonk_db
     restart: unless-stopped
     ports:
-      - "127.0.0.1:5432:5432"                                 # Only bind on the local interface. To connect to Postgres externally, change this to 0.0.0.0
+      - "127.0.0.1:5437:5432"                                 # Only bind on the local interface. To connect to Postgres externally, change this to 0.0.0.0
     networks:
       - listmonk
     environment:
